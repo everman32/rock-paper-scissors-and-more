@@ -12,16 +12,16 @@ export default class Helper {
     console.log(table.string());
   }
   createHeader() {
-    const header = [...this.logic.options];
+    const header = [...this.logic.availableMoves];
     header.unshift("[User \\ PC]");
     return header;
   }
   createBody() {
     const body = [];
-    this.logic.options.forEach((horizontOption, horizontIndex) => {
+    this.logic.availableMoves.forEach((horizontOption, horizontIndex) => {
       const row = [];
       row.push(horizontOption);
-      this.logic.options.forEach((verticalOption, verticalIndex) => {
+      this.logic.availableMoves.forEach((verticalOption, verticalIndex) => {
         row.push(this.logic.calculateWinner(horizontIndex, verticalIndex));
       });
       body.push(row);
