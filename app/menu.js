@@ -17,9 +17,4 @@ export default class Menu {
       console.log(`${key} - ${value}`);
     });
   }
-
-  selectItem() {
-    const input = readline.question("Enter your move: ");
-    return input;
-  }
 }
