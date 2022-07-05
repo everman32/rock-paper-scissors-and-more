@@ -1,51 +1,64 @@
 import Encryptor from "./encryptor.js";
-import Menu from "./menu.js";
 import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
+import Menu from "./menu.js";
 
 class App {
   constructor(args) {
     this.args = Array.from(args);
+    this.logic = new GameLogic(args);
   }
   launch() {
-    if (!this.verifyArgs(this.args)) return 0;
+    if (!this.verifyArgs(this.args)) process.exit(1);
     const availableMoves = this.args;
 
-    const logic = new GameLogic(availableMoves);
-    const menu = new Menu(availableMoves);
-    const helper = new Helper(logic);
-    const encryptor = new Encryptor();
-
-    let gameContinues = true;
-
-    while (gameContinues) {
-      const key = encryptor.generateKey();
-      const computerMove = logic.computerMakeMove();
-      const hmac = encryptor.generateHMAC(availableMoves[computerMove], key);
-
+    for (;;) {
+      const { key, hmac } = this.initGame();
       console.log(`HMAC: ${hmac}`);
 
-      menu.printItems();
-      const selectedItem = menu.selectItem();
-      if (selectedItem === 0) gameContinues = false;
-      if (selectedItem === -1) {
+      const selectedItem = this.interactUser();
+      if (selectedItem === "0") process.exit(0);
+      if (selectedItem === "?") {
+        const helper = new Helper(this.logic);
         helper.printHelpTable();
         console.log("\n");
       }
-      if (selectedItem > 0) {
-        const playerMove = logic.playerMakeMove(selectedItem - 1);
+      if (selectedItem > 0 && selectedItem <= availableMoves.length - 2) {
+        this.logic.playerMakeMove(selectedItem - 1);
 
-        console.log(`\nYour move: ${availableMoves[playerMove]}`);
-        console.log(`Computer move: ${availableMoves[computerMove]}`);
-        console.log(`Result: ${logic.calculateWinner()}`);
-
+        console.log(`\nYour move: ${availableMoves[this.logic.playerMove]}`);
+        console.log(
+          `Computer move: ${availableMoves[this.logic.computerMove]}`
+        );
+        console.log(`Result: ${this.logic.calculateWinner()}`);
         console.log(`Key: ${key}\n`);
       }
     }
   }
 
+  initGame() {
+    const encryptor = new Encryptor();
+    const key = encryptor.generateKey();
+    const hmac = encryptor.generateHMAC(
+      key,
+      this.args[this.logic.computerMakeMove()]
+    );
+    return {
+      key,
+      hmac,
+    };
+  }
+
+  interactUser() {
+    const menu = new Menu(this.args);
+    menu.printItems();
+
+    const selectedItem = menu.selectItem();
+    return selectedItem;
+  }
+
   verifyArgs() {
-    if (this.args.length < 3 || this.args.length % 2 == 0) {
+    if (this.args.length % 2 === 0 || this.args.length < 3) {
       console.error(
         "Invalid moves: please pass odd number of moves (3 or more)."
       );
