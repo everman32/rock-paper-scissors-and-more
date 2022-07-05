@@ -1,5 +1,3 @@
-import readline from "readline-sync";
-
 export default class Menu {
   constructor(items) {
     this.items = new Map(

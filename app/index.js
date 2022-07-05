@@ -2,6 +2,7 @@ import Encryptor from "./encryptor.js";
 import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
 import Menu from "./menu.js";
+import readline from "readline-sync";
 
 class App {
   constructor(args) {
