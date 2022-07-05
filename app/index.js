@@ -1,87 +1,58 @@
-import readline from "readline-sync";
 import Encryptor from "./encryptor.js";
+import Menu from "./menu.js";
+import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
-import Logic from "./logic.js";
-import { result } from "./logic.js";
 
 class App {
   constructor(args) {
     this.args = Array.from(args);
   }
   launch() {
-    if (!this.verifyArgs(this.args)) return;
+    if (!this.verifyArgs(this.args)) return 0;
+    const availableMoves = this.args;
 
+    const logic = new GameLogic(availableMoves);
+    const menu = new Menu(availableMoves);
+    const helper = new Helper(logic);
     const encryptor = new Encryptor();
-    const helper = new Helper(this.args);
-    const logic = new Logic(this.args.length);
 
     let gameContinues = true;
 
     while (gameContinues) {
       const key = encryptor.generateKey();
-      const computerMove = Math.floor(Math.random() * this.args.length);
-      const hmac = encryptor.generateHMAC(this.args[computerMove], key);
-      console.log("\nHMAC: " + hmac);
+      const computerMove = logic.computerMakeMove();
+      const hmac = encryptor.generateHMAC(availableMoves[computerMove], key);
 
-      console.log("Available Moves:");
-      this.args.forEach((arg) => {
-        console.log(this.args.indexOf(arg) + 1 + " - " + arg);
-      });
+      console.log(`HMAC: ${hmac}`);
 
-      console.log("0 - Exit");
-      console.log("? - Help");
-
-      const menuChoise = readline.question("Enter your move: ");
-      if (menuChoise == "?") {
-        helper.print();
+      menu.printItems();
+      const selectedItem = menu.selectItem();
+      if (selectedItem === 0) gameContinues = false;
+      if (selectedItem === -1) {
+        helper.printHelpTable();
         console.log("\n");
-        continue;
-      } else if (menuChoise == "0") {
-        gameContinues = false;
-        continue;
       }
+      if (selectedItem > 0) {
+        const playerMove = logic.playerMakeMove(selectedItem - 1);
 
-      const playerMove = Number.parseInt(menuChoise);
-      if (
-        isNaN(menuChoise) ||
-        playerMove <= 0 ||
-        playerMove > this.args.length
-      ) {
-        console.log("\n");
-        continue;
+        console.log(`\nYour move: ${availableMoves[playerMove]}`);
+        console.log(`Computer move: ${availableMoves[computerMove]}`);
+        console.log(`Result: ${logic.calculateWinner()}`);
+
+        console.log(`Key: ${key}\n`);
       }
-
-      console.log("\nYour move: ", this.args[playerMove - 1]);
-      console.log("Computer move: ", this.args[computerMove]);
-
-      switch (logic.decide(computerMove, playerMove - 1)) {
-        case result.WIN: {
-          console.log("You won!");
-          break;
-        }
-        case result.LOSE: {
-          console.log("You lost!");
-          break;
-        }
-        default: {
-          console.log("Draw!");
-          break;
-        }
-      }
-
-      console.log("Key: ", key, "\n");
     }
   }
 
-  verifyArgs(args) {
-    if (args.length < 3 || args.length % 2 == 0) {
-      console.log(
-        "Invalid options: please pass odd number of moves (3 or more)."
+  verifyArgs() {
+    if (this.args.length < 3 || this.args.length % 2 == 0) {
+      console.error(
+        "Invalid moves: please pass odd number of moves (3 or more)."
       );
       return false;
     }
-    if (new Set(args).size !== args.length) {
-      console.log("Invalid options: all moves must be distinct.");
+    if (new Set(this.args).size !== this.args.length) {
+      console.error("Invalid moves: all moves must be distinct.");
       return false;
     }
     return true;
