@@ -37,9 +37,8 @@ class App {
   }
 
   initGame() {
-    const encryptor = new Encryptor();
-    const key = encryptor.generateKey();
-    const hmac = encryptor.generateHMAC(
+    const key = Encryptor.generateKey();
+    const hmac = Encryptor.generateHMAC(
       key,
       this.args[this.logic.computerMakeMove()]
     );
@@ -53,7 +52,7 @@ class App {
     const menu = new Menu(this.args);
     menu.printItems();
 
-    const selectedItem = menu.selectItem();
+    const selectedItem = readline.question("Enter your move: ");
     return selectedItem;
   }
 
