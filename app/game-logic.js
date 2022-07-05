@@ -1,6 +1,6 @@
 export default class GameLogic {
-  constructor(options) {
-    this.options = options;
+  constructor(availableMoves) {
+    this.availableMoves = availableMoves;
     this.playerMove = null;
     this.computerMove = null;
     this.result = {
@@ -12,7 +12,7 @@ export default class GameLogic {
 
   computerMakeMove() {
     return (this.computerMove = Math.floor(
-      Math.random() * this.options.length
+      Math.random() * this.availableMoves.length
     ));
   }
 
@@ -27,9 +27,9 @@ export default class GameLogic {
     if (computerMove === playerMove) return this.result.draw;
     if (
       (playerMove > computerMove &&
-        playerMove - computerMove <= this.options.length / 2) ||
+        playerMove - computerMove <= this.availableMoves.length / 2) ||
       (playerMove < computerMove &&
-        computerMove - playerMove > this.options.length / 2)
+        computerMove - playerMove > this.availableMoves.length / 2)
     )
       return this.result.lose;
     return this.result.win;
