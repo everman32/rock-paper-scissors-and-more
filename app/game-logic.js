@@ -1,8 +1,8 @@
 export default class GameLogic {
   constructor(options) {
     this.options = options;
-    this.playerMove;
-    this.computerMove;
+    this.playerMove = null;
+    this.computerMove = null;
     this.result = {
       win: "win",
       lose: "lose",
