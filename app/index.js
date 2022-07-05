@@ -24,7 +24,7 @@ class App {
         helper.printHelpTable();
         console.log("\n");
       }
-      if (selectedItem > 0 && selectedItem <= availableMoves.length - 2) {
+      if (selectedItem > 0 && selectedItem <= availableMoves.length) {
         this.logic.playerMakeMove(selectedItem - 1);
 
         console.log(`\nYour move: ${availableMoves[this.logic.playerMove]}`);
