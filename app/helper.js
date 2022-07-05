@@ -1,33 +1,31 @@
 import WordTable from "word-table";
-import Logic from "./logic.js";
 
 export default class Helper {
-  constructor(names) {
-    this.names = Array.from(names);
+  constructor(logic) {
+    this.logic = logic;
   }
-  print() {
-    const header = ["PC \\ User"];
-    this.names.forEach((name) => {
-      header.push(name);
-    });
+  printHelpTable() {
+    const header = this.createHeader();
+    const body = this.createBody();
 
+    const table = new WordTable(header, body);
+    console.log(table.string());
+  }
+  createHeader() {
+    const header = [...this.logic.options];
+    header.unshift("[User \\ PC]");
+    return header;
+  }
+  createBody() {
     const body = [];
-    const logic = new Logic(this.names.length);
-
-    this.names.forEach((horizontalName) => {
+    this.logic.options.forEach((horizontOption, horizontIndex) => {
       const row = [];
-      row.push(horizontalName);
-      this.names.forEach((verticalName) => {
-        row.push(
-          logic.decide(
-            this.names.indexOf(horizontalName),
-            this.names.indexOf(verticalName)
-          )
-        );
+      row.push(horizontOption);
+      this.logic.options.forEach((verticalOption, verticalIndex) => {
+        row.push(this.logic.calculateWinner(horizontIndex, verticalIndex));
       });
       body.push(row);
     });
-    const table = new WordTable(header, body);
-    console.log(table.string());
+    return body;
   }
 }
