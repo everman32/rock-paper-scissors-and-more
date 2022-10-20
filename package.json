@@ -1,9 +1,23 @@
 {
-  "name": "victory",
+  "name": "rock-papper-scissors",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Console application, which is the well-known rock-paper-scissors game with additions",
+  "main": "src/index.js",
   "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "eslint src/**/* --ext .js",
+    "lint:fix": "npm run lint -- --fix",
+    "prit": "prettier --check src/**/*.js",
+    "prit:fix": "prettier --write src/**/*.js"
+  },
+  "keywords": [
+    "rock-papper-scissors",
+    "nodejs",
+    "console"
+  ],
+  "author": "Victor Borodyn",
+  "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
     "crypto-random-string": "^4.0.0",
@@ -15,10 +29,5 @@
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
