@@ -1,8 +1,8 @@
 export default class GameLogic {
   constructor(availableMoves) {
     this.availableMoves = availableMoves;
-    this.playerMove = null;
-    this.computerMove = null;
+    this.playerMove = undefined;
+    this.computerMove = undefined;
     this.result = {
       win: "win",
       lose: "lose",
@@ -11,13 +11,13 @@ export default class GameLogic {
   }
 
   computerMakeMove() {
-    return (this.computerMove = Math.floor(
-      Math.random() * this.availableMoves.length
-    ));
+    this.computerMove = Math.floor(Math.random() * this.availableMoves.length);
+    return this.computerMove;
   }
 
   playerMakeMove(choise) {
-    return (this.playerMove = Number.parseInt(choise, 10));
+    this.playerMove = Number.parseInt(choise, 10);
+    return this.playerMove;
   }
 
   calculateWinner(

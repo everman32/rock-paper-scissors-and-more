@@ -1,11 +1,12 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 import secureRandom from "crypto-random-string";
 
-export default class Encryptor {
-  static generateKey() {
+export default {
+  generateKey() {
     return secureRandom({ length: 32 });
-  }
-  static generateHMAC(key, message) {
+  },
+
+  generateHMAC(key, message) {
     return crypto.createHmac("sha256", key).update(message).digest("hex");
-  }
-}
+  },
+};

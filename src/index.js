@@ -1,16 +1,17 @@
+import readline from "readline-sync";
 import Encryptor from "./encryptor.js";
 import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
 import Menu from "./menu.js";
-import readline from "readline-sync";
 
 class App {
-  constructor(args) {
-    this.args = Array.from(args);
-    this.logic = new GameLogic(args);
+  constructor(arguments_) {
+    this.args = [...arguments_];
+    this.logic = new GameLogic(arguments_);
   }
+
   launch() {
-    if (!this.verifyArgs(this.args)) process.exit(1);
+    if (!this.verifyArgs(this.args)) return 1;
     const availableMoves = this.args;
 
     for (;;) {
@@ -18,7 +19,7 @@ class App {
       console.log(`HMAC: ${hmac}`);
 
       const selectedItem = this.interactUser();
-      if (selectedItem === "0") process.exit(0);
+      if (selectedItem === "0") return 0;
       if (selectedItem === "?") {
         const helper = new Helper(this.logic);
         helper.printHelpTable();
@@ -53,8 +54,7 @@ class App {
     const menu = new Menu(this.args);
     menu.printItems();
 
-    const selectedItem = readline.question("Enter your move: ");
-    return selectedItem;
+    return readline.question("Enter your move: ");
   }
 
   verifyArgs() {
@@ -72,5 +72,7 @@ class App {
   }
 }
 
-const app = new App(process.argv.slice(2).map((arg) => arg.toLowerCase()));
+const app = new App(
+  process.argv.slice(2).map((argument) => argument.toLowerCase())
+);
 app.launch();
