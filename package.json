@@ -20,8 +20,6 @@
   "author": "Victor Borodyn",
   "license": "MIT",
   "dependencies": {
-    "crypto": "^1.0.1",
-    "crypto-random-string": "^4.0.0",
     "prompt-sync": "^4.2.0",
     "readline-sync": "^1.4.10",
     "word-table": "^1.0.3"

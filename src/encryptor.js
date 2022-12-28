@@ -1,9 +1,8 @@
 import crypto from "node:crypto";
-import secureRandom from "crypto-random-string";
 
 export default {
   generateKey() {
-    return secureRandom({ length: 32 });
+    return crypto.randomBytes(32).toString("hex");
   },
 
   generateHMAC(key, message) {
