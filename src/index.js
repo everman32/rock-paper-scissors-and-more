@@ -11,7 +11,7 @@ class App {
   }
 
   launch() {
-    if (!this.verifyArgs(this.args)) return 1;
+    if (!this.verifyOddMoves() || !this.verifyDistinctMoves()) return 1;
     const availableMoves = this.args;
 
     for (;;) {
@@ -57,13 +57,17 @@ class App {
     return readline.question("Enter your move: ");
   }
 
-  verifyArgs() {
+  verifyOddMoves() {
     if (this.args.length % 2 === 0 || this.args.length < 3) {
       console.error(
         "Invalid moves: please pass odd number of moves (3 or more)."
       );
       return false;
     }
+    return true;
+  }
+
+  verifyDistinctMoves() {
     if (new Set(this.args).size !== this.args.length) {
       console.error("Invalid moves: all moves must be distinct.");
       return false;
