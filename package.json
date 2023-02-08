@@ -1,7 +1,7 @@
 {
-  "name": "rock-papper-scissors",
+  "name": "rock-scissors-papper",
   "version": "1.0.0",
-  "description": "Console application, which is the well-known rock-paper-scissors game with additions",
+  "description": "Console application, which is the well-known rock-scissors-papper game with additions",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "rock-papper-scissors",
+    "rock-scissors-papper",
     "nodejs",
     "console"
   ],
@@ -34,5 +34,13 @@
     "eslint-plugin-unicorn": "^44.0.2",
     "husky": "^8.0.1",
     "prettier": "^2.7.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/everman32/rock-paper-scissors-and-more.git"
+  },
+  "bugs": {
+    "url": "https://github.com/everman32/rock-paper-scissors-and-more/issues"
+  },
+  "homepage": "https://github.com/everman32/rock-paper-scissors-and-more#readme"
 }
