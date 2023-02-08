@@ -3,11 +3,6 @@ export default class GameLogic {
     this.availableMoves = availableMoves;
     this.playerMove = undefined;
     this.computerMove = undefined;
-    this.result = {
-      win: "win",
-      lose: "lose",
-      draw: "draw",
-    };
   }
 
   computerMakeMove() {
@@ -24,14 +19,14 @@ export default class GameLogic {
     playerMove = this.playerMove,
     computerMove = this.computerMove
   ) {
-    if (computerMove === playerMove) return this.result.draw;
+    if (computerMove === playerMove) return "draw";
     if (
       (playerMove > computerMove &&
         playerMove - computerMove <= this.availableMoves.length / 2) ||
       (playerMove < computerMove &&
         computerMove - playerMove > this.availableMoves.length / 2)
     )
-      return this.result.lose;
-    return this.result.win;
+      return "lose";
+    return "win";
   }
 }
