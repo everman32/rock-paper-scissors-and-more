@@ -6,15 +6,15 @@ import Menu from "./menu.js";
 import validator from "./validator.js";
 
 class App {
-  constructor(arguments_) {
-    this.args = [...arguments_];
-    this.logic = new GameLogic(arguments_);
-    this.helper = new Helper(this.logic);
-    this.menu = new Menu(this.args);
+  constructor(menu, logic, helper) {
+    this.menu = menu;
+    this.logic = logic;
+    this.helper = helper;
   }
 
   launch() {
-    const availableMoves = this.args;
+    const moves = this.logic.availableMoves;
+
     for (;;) {
       const { key, hmac } = this.initGame();
       console.log(`HMAC: ${hmac}`);
@@ -25,13 +25,11 @@ class App {
         this.helper.printHelpTable();
         console.log("\n");
       }
-      if (selectedItem > 0 && selectedItem <= availableMoves.length) {
+      if (selectedItem > 0 && selectedItem <= moves.length) {
         this.logic.playerMakeMove(selectedItem - 1);
 
-        console.log(`\nYour move: ${availableMoves[this.logic.playerMove]}`);
-        console.log(
-          `Computer move: ${availableMoves[this.logic.computerMove]}`
-        );
+        console.log(`\nYour move: ${moves[this.logic.playerMove]}`);
+        console.log(`Computer move: ${moves[this.logic.computerMove]}`);
         console.log(`Result: ${this.logic.calculateWinner()}`);
         console.log(`Key: ${key}\n`);
       }
@@ -42,7 +40,7 @@ class App {
     const key = encryptor.generateKey();
     const hmac = encryptor.generateHMAC(
       key,
-      this.args[this.logic.computerMakeMove()]
+      this.logic.availableMoves[this.logic.computerMakeMove()]
     );
     return {
       key,
@@ -62,6 +60,10 @@ if (
   validator.verifyOddOptions(options) &&
   validator.verifyDistinctOptions(options)
 ) {
-  const app = new App(options);
+  const menu = new Menu(options);
+  const logic = new GameLogic(options);
+  const helper = new Helper(logic);
+
+  const app = new App(menu, logic, helper);
   app.launch();
 }
