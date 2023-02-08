@@ -8,6 +8,8 @@ class App {
   constructor(arguments_) {
     this.args = [...arguments_];
     this.logic = new GameLogic(arguments_);
+    this.helper = new Helper(this.logic);
+    this.menu = new Menu(this.args);
   }
 
   launch() {
@@ -21,8 +23,7 @@ class App {
       const selectedItem = this.interactUser();
       if (selectedItem === "0") return 0;
       if (selectedItem === "?") {
-        const helper = new Helper(this.logic);
-        helper.printHelpTable();
+        this.helper.printHelpTable();
         console.log("\n");
       }
       if (selectedItem > 0 && selectedItem <= availableMoves.length) {
@@ -51,8 +52,7 @@ class App {
   }
 
   interactUser() {
-    const menu = new Menu(this.args);
-    menu.printItems();
+    this.menu.printItems();
 
     return readline.question("Enter your move: ");
   }
