@@ -1,8 +1,9 @@
 import readline from "readline-sync";
-import Encryptor from "./encryptor.js";
+import encryptor from "./encryptor.js";
 import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
 import Menu from "./menu.js";
+import validator from "./validator.js";
 
 class App {
   constructor(arguments_) {
@@ -13,9 +14,7 @@ class App {
   }
 
   launch() {
-    if (!this.verifyOddMoves() || !this.verifyDistinctMoves()) return 1;
     const availableMoves = this.args;
-
     for (;;) {
       const { key, hmac } = this.initGame();
       console.log(`HMAC: ${hmac}`);
@@ -40,8 +39,8 @@ class App {
   }
 
   initGame() {
-    const key = Encryptor.generateKey();
-    const hmac = Encryptor.generateHMAC(
+    const key = encryptor.generateKey();
+    const hmac = encryptor.generateHMAC(
       key,
       this.args[this.logic.computerMakeMove()]
     );
@@ -56,27 +55,13 @@ class App {
 
     return readline.question("Enter your move: ");
   }
-
-  verifyOddMoves() {
-    if (this.args.length % 2 === 0 || this.args.length < 3) {
-      console.error(
-        "Invalid moves: please pass odd number of moves (3 or more)."
-      );
-      return false;
-    }
-    return true;
-  }
-
-  verifyDistinctMoves() {
-    if (new Set(this.args).size !== this.args.length) {
-      console.error("Invalid moves: all moves must be distinct.");
-      return false;
-    }
-    return true;
-  }
 }
 
-const app = new App(
-  process.argv.slice(2).map((argument) => argument.toLowerCase())
-);
-app.launch();
+const options = process.argv.slice(2).map((option) => option.toLowerCase());
+if (
+  validator.verifyOddOptions(options) &&
+  validator.verifyDistinctOptions(options)
+) {
+  const app = new App(options);
+  app.launch();
+}
