@@ -6,31 +6,31 @@ import Menu from "./menu.js";
 import validator from "./validator.js";
 
 class App {
-  constructor(menu, logic, helper) {
+  constructor(menu, gameLogic, helper) {
     this.menu = menu;
-    this.logic = logic;
+    this.gameLogic = gameLogic;
     this.helper = helper;
   }
 
   launch() {
-    const moves = this.logic.availableMoves;
+    const moves = this.gameLogic.availableMoves;
 
     for (;;) {
       const { key, hmac } = this.initGame();
       console.log(`HMAC: ${hmac}`);
 
-      const selectedItem = this.interactUser();
-      if (selectedItem === "0") return 0;
-      if (selectedItem === "?") {
+      const input = this.interactWithUser();
+      if (input === "0") return 0;
+      if (input === "?") {
         this.helper.printHelpTable();
         console.log("\n");
       }
-      if (selectedItem > 0 && selectedItem <= moves.length) {
-        this.logic.playerMakeMove(selectedItem - 1);
+      if (input > 0 && input <= moves.length) {
+        this.gameLogic.playerMakeMove(input - 1);
 
-        console.log(`\nYour move: ${moves[this.logic.playerMove]}`);
-        console.log(`Computer move: ${moves[this.logic.computerMove]}`);
-        console.log(`Result: ${this.logic.calculateWinner()}`);
+        console.log(`\nYour move: ${moves[this.gameLogic.playerMove]}`);
+        console.log(`Computer move: ${moves[this.gameLogic.computerMove]}`);
+        console.log(`Result: ${this.gameLogic.calculateWinner()}`);
         console.log(`Key: ${key}\n`);
       }
     }
@@ -40,7 +40,7 @@ class App {
     const key = encryptor.generateKey();
     const hmac = encryptor.generateHMAC(
       key,
-      this.logic.availableMoves[this.logic.computerMakeMove()]
+      this.gameLogic.availableMoves[this.gameLogic.computerMakeMove()]
     );
     return {
       key,
@@ -48,9 +48,8 @@ class App {
     };
   }
 
-  interactUser() {
+  interactWithUser() {
     this.menu.printItems();
-
     return readline.question("Enter your move: ");
   }
 }

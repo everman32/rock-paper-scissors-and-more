@@ -1,8 +1,8 @@
 import WordTable from "word-table";
 
 export default class Helper {
-  constructor(logic) {
-    this.logic = logic;
+  constructor(gameLogic) {
+    this.gameLogic = gameLogic;
   }
 
   printHelpTable() {
@@ -14,18 +14,18 @@ export default class Helper {
   }
 
   createHeader() {
-    const header = [...this.logic.availableMoves];
+    const header = [...this.gameLogic.availableMoves];
     header.unshift("[User \\ PC]");
     return header;
   }
 
   createBody() {
     const body = [];
-    this.logic.availableMoves.forEach((horizontOption, horizontIndex) => {
+    this.gameLogic.availableMoves.forEach((horizontOption, horizontIndex) => {
       const row = [];
       row.push(horizontOption);
-      this.logic.availableMoves.forEach((verticalOption, verticalIndex) => {
-        row.push(this.logic.calculateWinner(horizontIndex, verticalIndex));
+      this.gameLogic.availableMoves.forEach((verticalOption, verticalIndex) => {
+        row.push(this.gameLogic.calculateWinner(horizontIndex, verticalIndex));
       });
       body.push(row);
     });

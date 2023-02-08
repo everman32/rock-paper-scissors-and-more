@@ -1,6 +1,6 @@
 export default class GameLogic {
-  constructor(availableMoves) {
-    this.availableMoves = availableMoves;
+  constructor(options) {
+    this.availableMoves = options;
     this.playerMove = undefined;
     this.computerMove = undefined;
   }

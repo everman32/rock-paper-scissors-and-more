@@ -1,7 +1,7 @@
 export default class Menu {
-  constructor(items) {
+  constructor(options) {
     this.items = new Map(
-      items.map((value, index) => {
+      options.map((value, index) => {
         return [index + 1, value];
       })
     )
