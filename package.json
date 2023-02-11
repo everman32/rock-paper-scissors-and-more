@@ -1,7 +1,7 @@
 {
-  "name": "rock-scissors-papper",
+  "name": "rock-paper-scissors-and-more-app",
   "version": "1.0.0",
-  "description": "Console application, which is the well-known rock-scissors-papper game with additions",
+  "description": "Extended console implementation of the world famous game",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "rock-scissors-papper",
+    "rock-paper-scissors",
     "nodejs",
     "console"
   ],
