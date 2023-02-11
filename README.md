@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/everman32/rock-scissors-papper-and-more-app) [![GitHub stars](https://img.shields.io/github/stars/everman32/rock-scissors-papper-and-more-app)](https://github.com/everman32/rock-scissors-papper-and-more-app/stargazers) [![GitHub forks](https://img.shields.io/github/forks/everman32/rock-scissors-papper-and-more-app)](https://github.com/everman32/rock-scissors-papper-and-more-app/network) [![GitHub issues](https://img.shields.io/github/issues/everman32/rock-scissors-papper-and-more-app)](https://github.com/everman32/rock-scissors-papper-and-more-app/issues) [![GitHub license](https://img.shields.io/github/license/everman32/rock-scissors-papper-and-more-app)](https://github.com/everman32/rock-scissors-papper-and-more-app)
 
-![logo](https://i.ibb.co/3cJYj8J/output.png)
+![logo](https://i.ibb.co/nBJDK99/rock-paper-scissors.png)
 
 Rock-scissors-papper-and-more-app is a extended console implementation of the world famous game
 
