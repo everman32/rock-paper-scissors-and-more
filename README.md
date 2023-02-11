@@ -45,3 +45,6 @@ Below is a scenario that reflects the various outcomes between the player and th
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
