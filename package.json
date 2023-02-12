@@ -20,7 +20,6 @@
   "author": "Victor Borodyn",
   "license": "MIT",
   "dependencies": {
-    "prompt-sync": "^4.2.0",
     "readline-sync": "^1.4.10",
     "word-table": "^1.0.3"
   },
