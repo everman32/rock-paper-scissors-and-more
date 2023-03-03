@@ -1,4 +1,4 @@
-node_modules
-.vscode
-.idea
-.deepsource.toml
+node_modules/
+
+.vscode/
+.idea/
