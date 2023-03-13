@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/everman32/rock-paper-scissors-and-more-app) [![GitHub stars](https://img.shields.io/github/stars/everman32/rock-paper-scissors-and-more-app)](https://github.com/everman32/rock-paper-scissors-and-more-app/stargazers) [![GitHub forks](https://img.shields.io/github/forks/everman32/rock-paper-scissors-and-more-app)](https://github.com/everman32/rock-paper-scissors-and-more-app/network) [![GitHub issues](https://img.shields.io/github/issues/everman32/rock-paper-scissors-and-more-app)](https://github.com/everman32/rock-paper-scissors-and-more-app/issues) [![GitHub license](https://img.shields.io/github/license/everman32/rock-paper-scissors-and-more-app)](https://github.com/everman32/rock-paper-scissors-and-more-app)
 
-![logo](https://i.ibb.co/Qk5mDjZ/logo.png)
+![logo](docs/logo.png)
 
 Extended console implementation of the world famous game
 
@@ -36,12 +36,12 @@ Based on the received values of the computer's move and a `random key`, using th
 ### Usage example
 Below is the implementation of the above scenario:
 
-![example](https://i.ibb.co/9Wv3C1c/example.png)
+![example](docs/example.png)
 
 ### Table of outcomes
 Below is a scenario that reflects the various outcomes between the player and the computer:
 
-![outcomes](https://i.ibb.co/t2YgtML/outcomes.png)
+![outcomes](docs/outcomes.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
