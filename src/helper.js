@@ -15,7 +15,7 @@ export default class Helper {
 
   createHeader() {
     const header = [...this.gameLogic.availableMoves];
-    header.unshift("[User \\ PC]");
+    header.unshift(String.raw`[User \ PC]`);
     return header;
   }
 

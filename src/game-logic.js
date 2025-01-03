@@ -1,3 +1,5 @@
+import crypto from "node:crypto";
+
 export default class GameLogic {
   constructor(options) {
     this.availableMoves = options;
@@ -6,7 +8,11 @@ export default class GameLogic {
   }
 
   computerMakeMove() {
-    this.computerMove = Math.floor(Math.random() * this.availableMoves.length);
+    const randomBuffer = new Uint32Array(1);
+    crypto.getRandomValues(randomBuffer);
+    const randomNumber = randomBuffer[0] / (0xff_ff_ff_ff + 1);
+    this.computerMove = Math.floor(randomNumber * this.availableMoves.length);
+
     return this.computerMove;
   }
 
