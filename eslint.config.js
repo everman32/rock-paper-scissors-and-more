@@ -28,6 +28,7 @@ export default [
   {
     rules: {
       "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-reduce": "off",
     },
   },
   eslintPluginPrettierRecommended,

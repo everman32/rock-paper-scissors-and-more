@@ -19,9 +19,6 @@
   ],
   "author": "Victor Borodyn",
   "license": "MIT",
-  "dependencies": {
-    "word-table": "^1.0.3"
-  },
   "devDependencies": {
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
