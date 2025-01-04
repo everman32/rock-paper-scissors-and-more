@@ -10,7 +10,7 @@
     "lint:fix": "npm run lint -- --fix",
     "prit": "prettier --check src/**/*.js",
     "prit:fix": "prettier --write src/**/*.js",
-    "prepare": "husky install"
+    "prepare": "git config core.hooksPath .git-hooks || echo 'Not in a git repo'"
   },
   "keywords": [
     "rock-paper-scissors",
@@ -26,7 +26,6 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-sonarjs": "^3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
-    "husky": "^8.0.1",
     "prettier": "^3.4.2"
   },
   "repository": {
