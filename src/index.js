@@ -1,4 +1,4 @@
-import readline from "readline-sync";
+import readline from "node:readline";
 import encryptor from "./encryptor.js";
 import GameLogic from "./game-logic.js";
 import Helper from "./helper.js";
@@ -12,14 +12,14 @@ class App {
     this.helper = helper;
   }
 
-  launch() {
+  async launch() {
     const moves = this.gameLogic.availableMoves;
 
     for (;;) {
       const { key, hmac } = this.initGame();
       console.log(`HMAC: ${hmac}`);
 
-      const input = this.interactWithUser();
+      const input = await this.interactWithUser();
       if (input === "0") return 0;
       if (input === "?") {
         this.helper.printHelpTable();
@@ -48,9 +48,17 @@ class App {
     };
   }
 
-  interactWithUser() {
+  async interactWithUser() {
     this.menu.printItems();
-    return readline.question("Enter your move: ");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    const prompt = () =>
+      new Promise((resolve) => rl.question("Enter your move: ", resolve));
+    const move = await prompt();
+    rl.close();
+    return move;
   }
 }
 
