@@ -27,13 +27,5 @@
     "eslint-plugin-sonarjs": "^3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "prettier": "^3.4.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/everman32/rock-paper-scissors-and-more.git"
-  },
-  "bugs": {
-    "url": "https://github.com/everman32/rock-paper-scissors-and-more/issues"
-  },
-  "homepage": "https://github.com/everman32/rock-paper-scissors-and-more#readme"
+  }
 }
