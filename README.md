@@ -43,6 +43,10 @@ Below is a scenario that reflects the various outcomes between the player and th
 
 ![outcomes](docs/outcomes.png)
 
+*The above table should be read from the **vertical** column, which indicates the **player's** move, to the **horizontal** column, which indicates the **computer's** move.*
+
+*For example, the `player` made a move `rock`, the `computer` made a move `scissors`. According to the table, the `player` wins.*
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
